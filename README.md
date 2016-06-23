@@ -85,7 +85,7 @@ Application provides two CSV report files:
 
 ##Installation
 
-Application is written in Python and requires Python 2.7. It uses the Spark computing framework (v1.6.1) that requires JVM(Java 7+).
+Application is written in Python and requires Python 2.7. It uses the Spark computing framework (v1.6.1) that requires JVM(Java 7+). Set $JAVA_HOME variable
 
 ###Git clone
 
@@ -98,7 +98,8 @@ Application uses the Spark computing framework in local mode. It can be modified
 The following steps are for installing Spark and using it in the local mode.
 
 
-    $ cd <directory where you want to install Spark>
+    $ cd <directory where you want to install Spark, e.g. ~/apps/ >
+    $ export APPS=~/apps
     $ wget http://apache.mirrors.ionfish.org/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz
     $ tar zxvf spark-1.6.1-bin-hadoop2.6.tgz
     $ rm spark-1.6.1-bin-hadoop2.6.tgz

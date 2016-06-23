@@ -5,6 +5,8 @@ For running test locally:
 
 Run the following steps to install Spark 1.6.1 distribution
 
+$ cd <directory where you want to install Spark, e.g. ~/apps/ >
+$ export APPS=~/apps
 $ wget http://apache.mirrors.ionfish.org/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz
 $ tar zxvf spark-1.6.1-bin-hadoop2.6.tgz
 $ rm spark-1.6.1-bin-hadoop2.6.tgz
