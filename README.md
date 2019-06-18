@@ -11,7 +11,7 @@ The statistics that the application computes are:
 - count of unique users that have generated attributed events for each advertiser, grouped by event type.
 
 
-##Data Processing
+## Data Processing
 
 Attribution application does the following:
 
@@ -20,17 +20,17 @@ Attribution application does the following:
 - Computes attributed events
 - Outputs some simple statistics
 
-###De-duplication
+### De-duplication
 
 Events are sometimes registered multiple times in the events dataset when they actually should be counted only once. For instance, a user might click on an ad twice by mistake. Application de-duplicates these events: for a given user / advertiser / event type combination, and removes events that happen more than once every minute. Period of time is a minute ( 60 seconds ), but it can be changed if desired.
 
-###Attribution processing
+### Attribution processing
 
 Attributed event is an event that happened chronologically after an impression and is considered to be the result of that impression. The advertiser and the user of both the impression and the event have to be the same for the event to be attributable. Example: a user buying an object after seeing an ad from an advertiser.
 
 Application computes attributed events and outputs some simple statistics on them.
 
-###Outputs
+### Outputs
 
 Application provides two CSV report files:
 
@@ -38,61 +38,61 @@ Application provides two CSV report files:
 - count_of_users.csv, contain the count of unique users for each advertiser, grouped by event type
 
 
-##Schemas
+## Schemas
 
-###Events
+### Events
 
-
+```
     Num	Name            Type            Description
     === ==============  =============== ======================================
-    1	timestamp	    integer	        Unix timestamp when the event happened.
-    2	event_id	    string (UUIDv4)	Unique ID for the event.
-    3	advertiser_id	integer	        The advertiser ID that the user interacted with.
-    4	user_id	        string (UUIDv4)	An anonymous user ID that generated the event.
-    5	event_type	    string	        The type of event. Potential values: click, visit, purchase
+    1	timestamp       integer         Unix timestamp when the event happened.
+    2	event_id        string (UUIDv4) Unique ID for the event.
+    3	advertiser_id   integer         The advertiser ID that the user interacted with.
+    4	user_id         string (UUIDv4) An anonymous user ID that generated the event.
+    5	event_type      string          The type of event. Potential values: click, visit, purchase
+```
 
-
-###Impressions
+### Impressions
 
 
     Num Name            Type            Description
     === ==============  =============== ======================================
-    1	timestamp	    integer	        Unix timestamp when the impression was served.
-    2	advertiser_id	integer	        The advertiser ID that owns the ad that was displayed.
-    3	creative_id	    integer	        The creative (or ad) ID that was displayed.
-    4	user_id	        string (UUIDv4)	An anonymous user ID this ad was displayed to.
+    1   timestamp       integer         Unix timestamp when the impression was served.
+    2   advertiser_id   integer         The advertiser ID that owns the ad that was displayed.
+    3   creative_id     integer         The creative (or ad) ID that was displayed.
+    4   user_id         string (UUIDv4) An anonymous user ID this ad was displayed to.
 
 
-###count_of_events.csv
-
-
-    Num Name            Type        Description
-    === ==============  ========    ==========================================
-    1	advertiser_id	integer	    The advertiser ID
-    2	event_type	    string	    The type of event. Potential values: click, visit, purchase
-    3	count	        integer	    The count of events for this advertiser ID and event type.
-
-
-###count_of_users.csv
+### count_of_events.csv
 
 
     Num Name            Type        Description
     === ==============  ========    ==========================================
-    1	advertiser_id	integer	    The advertiser ID
-    2	event_type	    string	    The type of event. Potential values: click, visit, purchase
-    3	count	        integer	    The count of unique users for this advertiser ID and event type.
+    1   advertiser_id   integer     The advertiser ID
+    2   event_type      string      The type of event. Potential values: click, visit, purchase
+    3   count           integer     The count of events for this advertiser ID and event type.
 
 
-##Installation
+### count_of_users.csv
+
+
+    Num Name            Type        Description
+    === ==============  ========    ==========================================
+    1   advertiser_id   integer     The advertiser ID
+    2   event_type      string      The type of event. Potential values: click, visit, purchase
+    3   count           integer     The count of unique users for this advertiser ID and event type.
+
+
+## Installation
 
 Application is written in Python and requires Python 2.7. It uses the Spark computing framework (v1.6.1) that requires JVM(Java 7+). Set $JAVA_HOME variable
 
-###Git clone
+### Git clone
 
 To run Attribution application, you can clone this repository.
 
 
-###Spark 1.6.1 distribution
+### Spark 1.6.1 distribution
 
 Application uses the Spark computing framework in local mode. It can be modified for using it on a cluster. For the cluster mode, Apache Spark requires a cluster manager and a distributed storage system. For cluster management, Spark supports standalone (native Spark cluster), Hadoop YARN, or Apache Mesos
 The following steps are for installing Spark and using it in the local mode.
@@ -109,7 +109,7 @@ The following steps are for installing Spark and using it in the local mode.
     $ export PATH=$PATH:$SPARK_HOME/python:$SPARK_HOME/bin:$SPARK_HOME/python/lib/py4j-0.9-src.zip
 
 
-##Configure Application
+## Configure Application
 
 To run application, you have to provide 2 input CSV files with events and impressions and specify their locations in config/attribution.ini configuration file, under :
 
@@ -129,7 +129,7 @@ Also, provide there the output parameters were you desire to store two CSV repor
     count_of_users_path=/tmp/count_of_users.csv
 
 
-##Run Application
+## Run Application
 
 
     $ cd <directory where application was cloned or copied>
@@ -158,7 +158,7 @@ and
     -rw-r--r--  1 user  group  61 Jun 22 15:49 part-00001
 
 
-##Testing Application
+## Testing Application
 
 Install nosetest package or any other python test engine before running the UnitTest suite for this application.
 
